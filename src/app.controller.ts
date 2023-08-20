@@ -19,8 +19,12 @@ export class AppController {
   // get single report
   @Get(':id')
   getSingleReport(@Param('type') type: string, @Param('id') id: string) {
-    console.log({ type, id });
-    return {};
+    // console.log({ type, id });
+    const reportType =
+      type === 'income' ? ReportType.INCOME : ReportType.EXPENSE;
+    return data.report
+      .filter((report) => report.type === reportType)
+      .find((item) => item.id === id);
   }
 
   // create report
